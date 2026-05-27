@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Mi Cielo, with love 🌸</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Nunito:wght@300;400;500;600&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FFFAF3;
+    --peach: #FFBFA8;
+    --peach-light: #FFE8DF;
+    --lavender: #C9B8D8;
+    --lavender-light: #EDE6F5;
+    --sky: #A8CEE0;
+    --sky-light: #DCF0FA;
+    --gold: #E8B86D;
+    --gold-light: #FDF3DC;
+    --rose: #E88C8C;
+    --rose-light: #FCEAEA;
+    --text-dark: #3C2D1E;
+    --text-mid: #6B5043;
+    --text-soft: #9B8070;
+    --hero-sky-top: #0C1B3A;
+    --hero-sky-mid: #1E3A5F;
+    --hero-sky-low: #5C3F7A;
+    --hero-horizon: #C4687A;
+    --hero-glow: #FFB87A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─────────────────────────────────────── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 2rem 1.5rem;
+    background: linear-gradient(
+      180deg,
+      #060e1f 0%,
+      #0C1B3A 20%,
+      #1E3A5F 42%,
+      #4A2862 58%,
+      #8A3F6A 72%,
+      #C4687A 84%,
+      #E8966A 93%,
+      #F9C87A 100%
+    );
+  }
+
+  /* Stars */
+  .stars-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+    opacity: 0;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.6); }
+    50%       { opacity: var(--peak, 0.9); transform: scale(1); }
+  }
+
+  /* Clouds */
+  .cloud-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .cloud {
+    position: absolute;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.07);
+    filter: blur(12px);
+    animation: driftCloud var(--cDur, 28s) linear infinite var(--cDelay, 0s);
+  }
+  @keyframes driftCloud {
+    0%   { transform: translateX(-200px); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.6; }
+    100% { transform: translateX(110vw); opacity: 0; }
+  }
+
+  /* Plane */
+  .plane {
+    position: absolute;
+    top: 30%;
+    left: -80px;
+    font-size: 2rem;
+    animation: flyPlane 18s linear infinite 3s;
+    filter: drop-shadow(0 0 12px rgba(255,200,120,0.9));
+    pointer-events: none;
+  }
+  @keyframes flyPlane {
+    0%   { left: -80px; top: 34%; opacity: 0; }
+    5%   { opacity: 1; }
+    95%  { opacity: 1; }
+    100% { left: 105%; top: 22%; opacity: 0; }
+  }
+
+  /* Hero text */
+  .hero-eyebrow {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    color: rgba(255,230,190,0.85);
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+    animation: fadeUp 1.2s ease both 0.3s;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.6rem, 7vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: #fff;
+    text-shadow: 0 2px 40px rgba(255,160,100,0.5);
+    animation: fadeUp 1.2s ease both 0.6s;
+    max-width: 14ch;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: #FFCF92;
+  }
+  .hero-subtitle {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+    font-weight: 300;
+    color: rgba(255,225,200,0.8);
+    margin-top: 1.4rem;
+    max-width: 44ch;
+    line-height: 1.7;
+    animation: fadeUp 1.2s ease both 0.9s;
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    animation: fadeUp 1.2s ease both 1.4s;
+    color: rgba(255,220,180,0.6);
+    font-size: 0.75rem;
+    font-family: 'Nunito', sans-serif;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .scroll-arrow {
+    width: 20px; height: 20px;
+    border-right: 1.5px solid rgba(255,220,180,0.5);
+    border-bottom: 1.5px solid rgba(255,220,180,0.5);
+    transform: rotate(45deg);
+    animation: bounceDown 1.8s ease-in-out infinite;
+  }
+  @keyframes bounceDown {
+    0%, 100% { transform: rotate(45deg) translateY(0); }
+    50%       { transform: rotate(45deg) translateY(6px); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── REVEAL ON SCROLL ──────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+  .reveal-delay-4 { transition-delay: 0.6s; }
+
+  /* ─── SECTION BASE ──────────────────────────────── */
+  section {
+    padding: 6rem 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .section-label {
+    display: inline-block;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.05rem;
+    color: var(--peach);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    color: var(--text-dark);
+    line-height: 1.15;
+    margin-bottom: 2rem;
+  }
+  .section-title em { font-style: italic; color: var(--rose); }
+
+  /* ─── LETTER ────────────────────────────────────── */
+  #letter-section {
+    position: relative;
+  }
+  #letter-section::before {
+    content: '';
+    position: absolute;
+    inset: 0 -20vw;
+    background: linear-gradient(180deg, var(--cream) 0%, #FFF2E8 40%, #FFF8F0 100%);
+    z-index: -1;
+  }
+
+  .letter-card {
+    background: linear-gradient(145deg, #FFFEFB 0%, #FFF8F0 100%);
+    border: 1px solid rgba(232,184,109,0.25);
+    border-radius: 20px;
+    padding: clamp(2rem, 5vw, 3.5rem);
+    position: relative;
+    box-shadow:
+      0 4px 30px rgba(200,150,100,0.08),
+      0 1px 0 rgba(255,255,255,0.9) inset;
+  }
+  .letter-card::before {
+    content: '\201C';
+    position: absolute;
+    top: 1.5rem;
+    left: 2.2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 7rem;
+    line-height: 1;
+    color: rgba(232,140,140,0.18);
+    pointer-events: none;
+  }
+
+  .letter-greeting {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+    color: var(--rose);
+    margin-bottom: 1.6rem;
+  }
+  .letter-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    font-weight: 400;
+    color: var(--text-mid);
+    line-height: 1.9;
+  }
+  .letter-body p { margin-bottom: 1.3rem; }
+  .letter-body p:last-child { margin-bottom: 0; }
+  .letter-body strong {
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+  .letter-body em {
+    font-style: italic;
+    color: #8A5A8A;
+  }
+  .letter-sign {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    color: var(--text-mid);
+    margin-top: 2rem;
+    text-align: right;
+  }
+
+  /* Divider */
+  .ornament {
+    text-align: center;
+    color: var(--peach);
+    font-size: 1.4rem;
+    margin: 0.5rem 0 2rem;
+    letter-spacing: 0.5rem;
+    opacity: 0.7;
+  }
+
+  /* ─── PROMISE SECTION ───────────────────────────── */
+  #promise-section {
+    padding: 0 1.5rem 6rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .promise-card {
+    background: linear-gradient(135deg, #1C2E50 0%, #2D1F4A 50%, #4A2038 100%);
+    border-radius: 24px;
+    padding: clamp(2.5rem, 6vw, 4rem);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .promise-card::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(255,150,80,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .promise-card::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(160,100,220,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .promise-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.4rem;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+  .time-badge {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 0.55rem 1.3rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    color: #FFD4A0;
+    font-weight: 500;
+  }
+  .time-separator {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    color: rgba(255,200,150,0.5);
+  }
+  .promise-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 1.4rem;
+    position: relative;
+    z-index: 1;
+  }
+  .promise-title em { font-style: italic; color: #FFD4A0; }
+  .promise-text {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+    font-weight: 300;
+    color: rgba(255,235,210,0.8);
+    line-height: 1.85;
+    max-width: 44ch;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  /* Stars inside promise card */
+  .promise-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .p-star {
+    position: absolute;
+    background: rgba(255,255,255,0.7);
+    border-radius: 50%;
+    animation: twinkle var(--dur, 2.5s) ease-in-out infinite var(--delay, 0s);
+    opacity: 0;
+  }
+
+  /* ─── COMFORT SECTION ───────────────────────────── */
+  #comfort-section {
+    padding: 0 1.5rem 6rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .comfort-header { text-align: center; margin-bottom: 3rem; }
+
+  /* Hug button */
+  .hug-wrap {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+  }
+  .hug-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: linear-gradient(135deg, var(--rose) 0%, #D4607A 100%);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    font-weight: 600;
+    border: none;
+    border-radius: 60px;
+    padding: 1rem 2.4rem;
+    cursor: pointer;
+    box-shadow: 0 6px 30px rgba(220,80,100,0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    letter-spacing: 0.02em;
+    position: relative;
+    z-index: 1;
+  }
+  .hug-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 10px 40px rgba(220,80,100,0.4);
+  }
+  .hug-btn:active { transform: scale(0.97); }
+  .hug-msg {
+    display: none;
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    color: var(--rose);
+    margin-top: 1.2rem;
+    animation: fadeUp 0.5s ease both;
+  }
+  .hug-msg.show { display: block; }
+
+  /* Heart burst */
+  .heart-particle {
+    position: fixed;
+    pointer-events: none;
+    font-size: 1.5rem;
+    z-index: 9999;
+    animation: burstHeart 1.4s ease-out forwards;
+  }
+  @keyframes burstHeart {
+    0%   { transform: translate(0,0) scale(0.5); opacity: 1; }
+    60%  { opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(1.1); opacity: 0; }
+  }
+
+  /* Reminders grid */
+  .reminders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+  }
+  .reminder-card {
+    background: #fff;
+    border: 1px solid rgba(200,180,220,0.3);
+    border-radius: 18px;
+    padding: 1.6rem 1.4rem;
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: default;
+  }
+  .reminder-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(160,120,200,0.15);
+  }
+  .reminder-icon {
+    font-size: 2.2rem;
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+  .reminder-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.35rem;
+  }
+  .reminder-text {
+    font-size: 0.88rem;
+    color: var(--text-soft);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  /* ─── FOOTER ────────────────────────────────────── */
+  footer {
+    background: linear-gradient(180deg, #FFF8F0 0%, #F5EAE2 100%);
+    border-top: 1px solid rgba(232,184,109,0.2);
+    padding: 4rem 1.5rem 3rem;
+    text-align: center;
+  }
+  .footer-divider {
+    font-size: 1.2rem;
+    color: var(--peach);
+    letter-spacing: 0.4rem;
+    margin-bottom: 1.8rem;
+    opacity: 0.8;
+  }
+  .footer-sign {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: var(--text-mid);
+    line-height: 1.4;
+  }
+  .footer-sign span { color: var(--rose); }
+  .footer-note {
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    margin-top: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── RESPONSIVE ────────────────────────────────── */
+  @media (max-width: 600px) {
+    .promise-time { flex-direction: column; gap: 0.7rem; }
+    .time-separator { display: none; }
+    .letter-card::before { font-size: 4rem; top: 0.8rem; left: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section id="hero">
+  <!-- Stars -->
+  <div class="stars-layer" id="starsLayer"></div>
+
+  <!-- Clouds -->
+  <div class="cloud-layer" id="cloudLayer"></div>
+
+  <!-- Plane -->
+  <div class="plane" aria-hidden="true">✈</div>
+
+  <p class="hero-eyebrow">✦ A little something, just for you ✦</p>
+  <h1 class="hero-title">Keep Soaring,<br /><em>Beautiful.</em></h1>
+  <p class="hero-subtitle">A quiet reminder from your fav polar bear for when the days get too heavy and you feel tired.</p>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ LETTER ══════════════════ -->
+<section id="letter-section">
+  <div class="reveal">
+    <span class="section-label">a letter, just for you</span>
+    <h2 class="section-title">To My Favorite <em>Aviator,</em><br />Charvi.</h2>
+  </div>
+  <div class="reveal reveal-delay-1">
+    <div class="letter-card">
+      <p class="letter-greeting">My dearest Charvi,</p>
+      <div class="letter-body">
+        <p>
+          I see you. I really, truly see you. Every single morning when you wake up at
+          <strong>7 AM</strong>, when you gather yourself, get up, and walk into another long
+          day — I see the quiet strength it takes to do that, day after day.
+        </p>
+        <p>
+          Nine hours of coaching, from <strong>9 AM to 6 PM</strong>, and then still more
+          work waiting for you at home — the homework, the notes, the endless pages — and yet
+          you keep going. You don't give up. You show up for, even when you're
+          exhausted, even when the weight feels impossible.
+        </p>
+        <p>
+          <em>That</em> is not ordinary. That is extraordinary. And I want you to know that I
+          am so, so, <strong>so proud of you</strong>. Not just the version of you that aces
+          exams or gets everything right, but this version — the tired one, the still-trying one,
+          the showing-up-anyway one. <em>Especially</em> her.
+        </p>
+        <p>
+          You are going to <strong>absolutely crush this aviation journey</strong>, Ms Kapur.
+          Not someday. Not maybe. You were built for this sky. Every hard day right now is just
+          the altitude training before you soar higher than you can even imagine.
+        </p>
+        <p>
+          I have always believed in you. And on the days you
+          forget it — I'll remember it enough for both of us.
+        </p>
+      </div>
+      <div class="ornament" aria-hidden="true">✦ ✦ ✦</div>
+      <p class="letter-sign">With the whole of my heart,<br />Monchan 🌸</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ PROMISE ══════════════════ -->
+<div id="promise-section">
+  <div class="reveal">
+    <div class="promise-card">
+      <!-- Small stars inside card -->
+      <div class="promise-stars" id="promiseStars"></div>
+
+      <div class="promise-time" aria-label="2 PM or 2 AM">
+        <div class="time-badge">2 PM</div>
+        <div class="time-separator">or</div>
+        <div class="time-badge">2 AM</div>
+      </div>
+
+      <h2 class="promise-title">I am always<br /><em>right here.</em></h2>
+
+      <p class="promise-text">
+        No matter the time frame — whether it's 2 PM or 2 AM — I am always right here,
+        waiting to listen, to hold you, cuddle you, or just to be there in silence beside you.
+        You are <em style="color: #FFD4A0; font-style: italic;">never</em> alone in this, love.
+        Not for a single moment.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ COMFORT ══════════════════ -->
+<div id="comfort-section">
+  <div class="comfort-header reveal">
+    <span class="section-label">small comforts</span>
+    <h2 class="section-title">A little check-in,<br /><em>just for you.</em></h2>
+  </div>
+
+  <!-- Hug button -->
+  <div class="hug-wrap reveal reveal-delay-1" id="hugWrap">
+    <button class="hug-btn" id="hugBtn" onclick="sendHug()">
+      🤗 Click for a Virtual Hug
+    </button>
+    <p class="hug-msg" id="hugMsg">Sending you the tightest, biggest hug right now 💕</p>
+  </div>
+
+  <!-- Reminders grid -->
+  <div class="reminders-grid">
+    <div class="reminder-card reveal reveal-delay-1">
+      <span class="reminder-icon">💧</span>
+      <p class="reminder-title">Stay hydrated</p>
+      <p class="reminder-text">Did you drink water today? Your brain runs on it too.</p>
+    </div>
+    <div class="reminder-card reveal reveal-delay-2">
+      <span class="reminder-icon">🍎</span>
+      <p class="reminder-title">Eat something lovely</p>
+      <p class="reminder-text">Please eat something delicious. Your body is working so hard for you.</p>
+    </div>
+    <div class="reminder-card reveal reveal-delay-3">
+      <span class="reminder-icon">🌸</span>
+      <p class="reminder-title">Breathe, you're amazing</p>
+      <p class="reminder-text">Take a deep breath. You are doing so incredibly well.</p>
+    </div>
+    <div class="reminder-card reveal reveal-delay-4">
+      <span class="reminder-icon">🛌</span>
+      <p class="reminder-title">Rest is not giving up</p>
+      <p class="reminder-text">Resting is part of the journey. You deserve it, every bit.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <div class="reveal">
+    <div class="footer-divider" aria-hidden="true">✦ ✦ ✦</div>
+    <p class="footer-sign">
+      Forever your biggest fan,<br />
+      <span>Pranshu ❤️</span>
+    </p>
+    <p class="footer-note">This page was made entirely out of love. Just for you.</p>
+  </div>
+</footer>
+
+<script>
+  /* ── Generate stars in hero ── */
+  const starsLayer = document.getElementById('starsLayer');
+  for (let i = 0; i < 160; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2.2 + 0.6;
+    s.style.cssText = `
+      width: ${size}px; height: ${size}px;
+      top: ${Math.random() * 65}%;
+      left: ${Math.random() * 100}%;
+      --dur: ${(Math.random() * 3 + 2).toFixed(1)}s;
+      --delay: ${(Math.random() * 5).toFixed(1)}s;
+      --peak: ${(Math.random() * 0.5 + 0.4).toFixed(2)};
+    `;
+    starsLayer.appendChild(s);
+  }
+
+  /* ── Generate clouds in hero ── */
+  const cloudLayer = document.getElementById('cloudLayer');
+  const cloudData = [
+    { w:280, h:60, top:'18%' },
+    { w:200, h:45, top:'32%' },
+    { w:350, h:70, top:'52%' },
+    { w:180, h:40, top:'65%' },
+    { w:300, h:55, top:'75%' },
+    { w:240, h:50, top:'42%' },
+  ];
+  cloudData.forEach((c, i) => {
+    const el = document.createElement('div');
+    el.className = 'cloud';
+    el.style.cssText = `
+      width: ${c.w}px; height: ${c.h}px; top: ${c.top};
+      --cDur: ${(22 + i * 5)}s;
+      --cDelay: ${(i * 3.5)}s;
+      left: -300px;
+    `;
+    cloudLayer.appendChild(el);
+  });
+
+  /* ── Promise card micro-stars ── */
+  const promiseStars = document.getElementById('promiseStars');
+  for (let i = 0; i < 55; i++) {
+    const s = document.createElement('div');
+    s.className = 'p-star';
+    const sz = Math.random() * 1.8 + 0.5;
+    s.style.cssText = `
+      width: ${sz}px; height: ${sz}px;
+      top: ${Math.random() * 100}%;
+      left: ${Math.random() * 100}%;
+      --dur: ${(Math.random() * 2.5 + 1.5).toFixed(1)}s;
+      --delay: ${(Math.random() * 4).toFixed(1)}s;
+      --peak: 0.7;
+    `;
+    promiseStars.appendChild(s);
+  }
+
+  /* ── Scroll reveal ── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ── Virtual hug ── */
+  const hugMessages = [
+    "Sending you the tightest, biggest hug right now 💕",
+    "Wrapped in love, always and forever 🌸",
+    "This hug comes with extra warmth, just for you ❤️",
+    "You are so loved by me ms kapur. So, so loved. 💛",
+    "A hug that never ends, never will end, from me to you 🌷"
+  ];
+  let hugCount = 0;
+
+  function sendHug() {
+    const btn = document.getElementById('hugBtn');
+    const msg = document.getElementById('hugMsg');
+    msg.textContent = hugMessages[hugCount % hugMessages.length];
+    msg.classList.add('show');
+    hugCount++;
+
+    const btnRect = btn.getBoundingClientRect();
+    const cx = btnRect.left + btnRect.width / 2;
+    const cy = btnRect.top + btnRect.height / 2;
+
+    const emojis = ['💕','🌸','💗','✨','💖','🌷','💝','🤍','💓','🌺'];
+    for (let i = 0; i < 22; i++) {
+      const p = document.createElement('div');
+      p.className = 'heart-particle';
+      p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      const angle = (Math.random() * 360) * (Math.PI / 180);
+      const dist = 90 + Math.random() * 180;
+      p.style.cssText = `
+        left: ${cx}px; top: ${cy}px;
+        --dx: ${(Math.cos(angle) * dist).toFixed(0)}px;
+        --dy: ${(Math.sin(angle) * dist - 60).toFixed(0)}px;
+        animation-delay: ${(Math.random() * 0.25).toFixed(2)}s;
+        font-size: ${(1.1 + Math.random() * 1.1).toFixed(1)}rem;
+      `;
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 1800);
+    }
+  }
+</script>
+</body>
+</html>
