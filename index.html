@@ -530,7 +530,9 @@
 </style>
 </head>
 <body>
-
+<audio id="bgMusic" autoplay loop>
+  <source src="surprise.mp3" type="audio/mpeg">
+</audio>
 <!-- ══════════════════ HERO ══════════════════ -->
 <section id="hero">
   <!-- Stars -->
@@ -780,6 +782,45 @@
       setTimeout(() => p.remove(), 1800);
     }
   }
+ /* ── Autoplay Music Trigger ── */
+  window.addEventListener('DOMContentLoaded', () => {
+    const music = document.getElementById('bgMusic');
+    if (music) {
+      music.volume = 0.4; // Sets a gentle 40% background volume
+      
+      // 1. Try to autoplay instantly
+      const attemptPlay = music.play();
+      
+      if (attemptPlay !== undefined) {
+        attemptPlay.catch(error => {
+          console.log("Autoplay blocked by browser. Setting up fallback triggers...");
+          
+          // 2. Fallback: Play the absolute millisecond she interacts with the page
+          const playOnInteraction = () => {
+            music.play()
+              .then(() => {
+                // Once it successfully plays, remove the listeners so they don't keep firing
+                cleanUpListeners();
+              })
+              .catch(err => console.log("Playback failed:", err));
+          };
+
+          const cleanUpListeners = () => {
+            window.removeEventListener('click', playOnInteraction);
+            window.removeEventListener('touchstart', playOnInteraction);
+            window.removeEventListener('pointerdown', playOnInteraction);
+            window.removeEventListener('scroll', playOnInteraction);
+          };
+
+          // Listen for any type of touch, click, or scroll
+          window.addEventListener('click', playOnInteraction);
+          window.addEventListener('touchstart', playOnInteraction);
+          window.addEventListener('pointerdown', playOnInteraction);
+          window.addEventListener('scroll', playOnInteraction);
+        });
+      }
+    }
+  });
 </script>
 </body>
 </html>
